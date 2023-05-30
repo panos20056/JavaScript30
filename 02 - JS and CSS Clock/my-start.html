@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./myStyles.css">
+    <title>My JS + CSS clock</title>
+</head>
+<body>
+    <div class="clock-body">
+        <div class="clock-face">
+            <div class="arm" id="min-arm"></div>
+            <div class="arm" id="hour-arm"></div>
+            <div class="arm" id="sec-arm"></div>
+        </div>
+    </div>
+
+    <script>
+        const secondArm = document.querySelector('#sec-arm');
+        const minArm = document.querySelector('#min-arm');
+        const hourArm = document.querySelector('#hour-arm');
+
+        function setDate() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const secondsDegrees = seconds*6 + 90;
+            secondArm.style.transform = `rotate(${secondsDegrees}deg)`;
+
+            const minutes = now.getMinutes();
+            const minsDegrees = minutes*6 + 90;
+            minArm.style.transform = `rotate(${minsDegrees}deg)`;
+
+            const hour = now.getHours() % 12;
+            const hourDegrees = (hour*30) + (0.5*minutes) + 90;
+            hourArm.style.transform = `rotate(${hourDegrees}deg)`; 
+        }
+
+        setDate();
+        setInterval(setDate, 200);
+    </script>
+</body>
+</html>
